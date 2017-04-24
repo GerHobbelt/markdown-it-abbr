@@ -23,14 +23,13 @@
     "test": "make test"
   },
   "devDependencies": {
-    "browserify": "*",
-    "coveralls": "^2.11.2",
-    "eslint": "0.10.2",
-    "eslint-plugin-nodeca": "^1.0.0",
-    "istanbul": "*",
-    "markdown-it": "^5.0.3",
-    "markdown-it-testgen": "~0.1.0",
-    "mocha": "*",
-    "uglify-js": "*"
+    "browserify": "14.3.0",
+    "coveralls": "2.13.0",
+    "eslint": "3.19.0",
+    "istanbul": "0.4.5",
+    "markdown-it": "github:GerHobbelt/markdown-it",
+    "markdown-it-testgen": "0.1.4",
+    "mocha": "3.3.0",
+    "uglify-js": "2.8.22"
   }
 }
