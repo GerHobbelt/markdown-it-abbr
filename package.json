@@ -20,16 +20,17 @@
   "license": "MIT",
   "main": "index.js",
   "scripts": {
-    "test": "make test"
+    "test": "make test",
+    "build": "make"
   },
   "devDependencies": {
-    "browserify": "14.3.0",
-    "coveralls": "2.13.0",
+    "browserify": "14.4.0",
+    "coveralls": "2.13.1",
     "eslint": "3.19.0",
     "istanbul": "0.4.5",
     "markdown-it": "github:GerHobbelt/markdown-it",
     "markdown-it-testgen": "0.1.4",
-    "mocha": "3.3.0",
-    "uglify-js": "2.8.22"
+    "mocha": "3.4.2",
+    "uglify-js": "3.0.15"
   }
 }
