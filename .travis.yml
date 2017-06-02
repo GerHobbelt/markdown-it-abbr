@@ -5,5 +5,5 @@ node_js:
  - 6
  - 7
  - stable
-script: make coverage
+after_success: make report-coverage
 sudo: false
