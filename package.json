@@ -27,7 +27,7 @@
     "browserify": "14.4.0",
     "eslint": "4.3.0",
     "istanbul": "0.4.5",
-    "markdown-it": "github:GerHobbelt/markdown-it#master",
+    "markdown-it": "GerHobbelt/markdown-it#master",
     "markdown-it-testgen": "GerHobbelt/markdown-it-testgen#master",
     "mocha": "3.5.0",
     "uglify-js": "3.0.27"
