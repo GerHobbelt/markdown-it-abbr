@@ -32,13 +32,13 @@ browserify:
 	# Browserify
 	( printf "/*! ${NPM_PACKAGE} ${NPM_VERSION} ${GITHUB_PROJ} @license MIT */" ; \
 		browserify ./ -s markdownitAbbr \
-		) > dist/markdown-it-abbr.js
+		) > dist/${NPM_PACKAGE}.js
 
 minify: browserify
 	# Minify
-	uglifyjs dist/markdown-it-abbr.js -b beautify=false,ascii_only=true -c -m \
+	uglifyjs dist/${NPM_PACKAGE}.js -b beautify=false,ascii_only=true -c -m \
 		--preamble "/*! ${NPM_PACKAGE} ${NPM_VERSION} ${GITHUB_PROJ} @license MIT */" \
-		> dist/markdown-it-abbr.min.js
+		> dist/${NPM_PACKAGE}.min.js
 
 todo:
 	@echo ""
