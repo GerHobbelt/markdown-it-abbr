@@ -1,6 +1,6 @@
 {
   "name": "markdown-it-abbr",
-  "version": "1.0.4-8",
+  "version": "1.0.4-9",
   "description": "<abbr> tag for markdown-it markdown parser.",
   "keywords": [
     "markdown-it-plugin",
