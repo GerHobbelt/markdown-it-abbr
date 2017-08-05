@@ -80,10 +80,10 @@ module.exports = function sub_plugin(md) {
     regText = '(^|' + UNICODE_PUNCT_RE + '|' + UNICODE_SPACE_RE +
                     '|[' + OTHER_CHARS.split('').map(escapeRE).join('') + '])'
             + '(' + Object.keys(state.env.abbreviations).map(function (x) {
-                      return x.substr(1);                                    // eslint-disable-line 
-                    }).sort(function (a, b) {                                // eslint-disable-line 
-                      return b.length - a.length;                            // eslint-disable-line 
-                    }).map(escapeRE).join('|') + ')'
+                      return x.substr(1);                                    // eslint-disable-line
+                    }).sort(function (a, b) {                                // eslint-disable-line
+                      return b.length - a.length;                            // eslint-disable-line
+                    }).map(escapeRE).join('|') + ')'                         // eslint-disable-line
             + '($|' + UNICODE_PUNCT_RE + '|' + UNICODE_SPACE_RE +
                     '|[' + OTHER_CHARS.split('').map(escapeRE).join('') + '])';
 

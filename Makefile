@@ -12,7 +12,7 @@ CURR_HEAD   := $(firstword $(shell git show-ref --hash HEAD | cut -b -6) master)
 GITHUB_PROJ := https://github.com//markdown-it/${NPM_PACKAGE}
 
 
-build: lint browserify test todo 
+build: lint browserify test coverage todo 
 
 lint:
 	eslint .
@@ -52,4 +52,4 @@ clean:
 	-rm -rf ./dist/
 
 .PHONY: clean lint test todo coverage report-coverage build browserify minify
-.SILENT: lint test todo
+.SILENT: help lint test todo

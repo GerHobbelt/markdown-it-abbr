@@ -4,6 +4,7 @@ node_js:
  - 5
  - 6
  - 7
- - stable
+ - 8
+ - node
 after_success: make report-coverage
 sudo: false
