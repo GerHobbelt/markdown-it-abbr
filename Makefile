@@ -1,6 +1,6 @@
 PATH        := ./node_modules/.bin:${PATH}
 
-NPM_PACKAGE := $(shell node -e 'process.stdout.write(require("./package.json").name)')
+NPM_PACKAGE := $(shell node -e 'process.stdout.write(require("./package.json").name.replace(/^.*?\//, ""))')
 NPM_VERSION := $(shell node -e 'process.stdout.write(require("./package.json").version)')
 
 TMP_PATH    := /tmp/${NPM_PACKAGE}-$(shell date +%s)
@@ -9,7 +9,7 @@ REMOTE_NAME ?= origin
 REMOTE_REPO ?= $(shell git config --get remote.${REMOTE_NAME}.url)
 
 CURR_HEAD   := $(firstword $(shell git show-ref --hash HEAD | cut -b -6) master)
-GITHUB_PROJ := https://github.com//markdown-it/${NPM_PACKAGE}
+GITHUB_PROJ := https://github.com//GerHobbelt/${NPM_PACKAGE}
 
 
 build: lint browserify test coverage todo 
@@ -51,5 +51,14 @@ clean:
 	-rm -rf ./coverage/
 	-rm -rf ./dist/
 
-.PHONY: clean lint test todo coverage report-coverage build browserify minify
+superclean: clean
+	-rm -rf ./node_modules/
+	-rm -f ./package-lock.json
+
+prep: superclean
+	-ncu -a --packageFile=package.json
+	-npm install
+
+
+.PHONY: clean lint test todo coverage report-coverage build browserify minify superclean prep
 .SILENT: help lint test todo
