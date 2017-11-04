@@ -1,8 +1,8 @@
 # markdown-it-abbr
 
 [![Build Status](https://img.shields.io/travis/GerHobbelt/markdown-it-abbr/master.svg?style=flat)](https://travis-ci.org/GerHobbelt/markdown-it-abbr)
-[![NPM version](https://img.shields.io/npm/v/markdown-it-abbr.svg?style=flat)](https://www.npmjs.org/package/markdown-it-abbr)
-[![Coverage Status](https://img.shields.io/coveralls/markdown-it/markdown-it-abbr/master.svg?style=flat)](https://coveralls.io/r/markdown-it/markdown-it-abbr?branch=master)
+[![NPM version](https://img.shields.io/npm/v/@gerhobbelt/markdown-it-abbr.svg?style=flat)](https://www.npmjs.org/package/@gerhobbelt/markdown-it-abbr)
+[![Coverage Status](https://img.shields.io/coveralls/GerHobbelt/markdown-it-abbr/master.svg?style=flat)](https://coveralls.io/r/GerHobbelt/markdown-it-abbr?branch=master)
 
 > Abbreviation (`<abbr>`) tag plugin for [markdown-it](https://github.com/markdown-it/markdown-it) markdown parser.
 
@@ -31,17 +31,17 @@ is maintained by the <abbr title="World Wide Web Consortium">W3C</abbr>.</p>
 node.js, browser:
 
 ```bash
-npm install markdown-it-abbr --save
-bower install markdown-it-abbr --save
+npm install @gerhobbelt/markdown-it-abbr --save
+bower install @gerhobbelt/markdown-it-abbr --save
 ```
 
 ## Use
 
 ```js
-var md = require('markdown-it')()
-            .use(require('markdown-it-abbr'));
+var md = require('@gerhobbelt/markdown-it')()
+            .use(require('@gerhobbelt/markdown-it-abbr'));
 
-md.render(/*...*/) // see example above
+md.render(/*...*/); // See examples above
 ```
 
 _Differences in browser._ If you load script directly into the page, without
@@ -50,4 +50,4 @@ package system, module will add itself globally as `window.markdownitAbbr`.
 
 ## License
 
-[MIT](https://github.com/markdown-it/markdown-it-abbr/blob/master/LICENSE)
+[MIT](https://github.com/GerHobbelt/markdown-it-abbr/blob/master/LICENSE)
