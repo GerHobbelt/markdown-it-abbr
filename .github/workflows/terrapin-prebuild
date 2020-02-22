@@ -1,0 +1,47 @@
+#!/usr/bin/env node
+'use strict';
+
+/**
+ * This file serves as the pre-build step during Terrapin npm package builds.
+ * 
+ * Its only function is to clean the `integrity` fields from `package-lock.js` files, so that the build
+ * can use Terrapin-built artifacts that might have different hashes.
+ */
+
+function visitDependencies(node, cb) {
+	if (!node.hasOwnProperty("dependencies"))
+		return;
+
+	for (var depKey in node.dependencies) {
+		var depNode = node.dependencies[depKey];
+		visitDependencies(depNode, cb);
+		cb(depNode);
+	}
+}
+
+const fs = require('fs');
+
+const lockFileName = 'package-lock.json';
+const integrityField = 'integrity';
+
+if (fs.existsSync(lockFileName)) {
+	console.log(`Cleaning ${lockFileName} from all '${integrityField}' fields, to allow Terrapin-built artifacts to be consumed`);
+	let lockFileText = fs.readFileSync(lockFileName);
+
+	let lockData = JSON.parse(lockFileText);
+	var i = 0;
+	visitDependencies(lockData, function (dep) {
+		if (dep[integrityField]) {
+			++i;
+			delete dep[integrityField];
+		}
+	});
+	console.log(`Cleaned ${i} '${integrityField}' fields`);
+
+	lockFileText = JSON.stringify(lockData, null, 2);
+	fs.writeFileSync(lockFileName, lockFileText);
+	console.log(`Wrote ${lockFileName}`);
+}
+else {
+	console.log('Lock file not found');
+}
