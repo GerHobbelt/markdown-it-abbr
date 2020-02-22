@@ -1,0 +1,23 @@
+name: Terrapin Package Build
+
+on: [push, repository_dispatch]
+
+jobs:
+  build:
+    runs-on: 'ubuntu-latest'
+    steps:
+    - uses: actions/checkout@master
+      name: Checkout source
+
+    - name: Build package with Oryx
+      run:  docker run --volume $(pwd):/repo --volume /home/runner/outputfolder:/output --env PRE_BUILD_COMMAND='chmod +x .github/workflows/terrapin-prebuild && .github/workflows/terrapin-prebuild' mcr.microsoft.com/oryx/build:latest oryx build --package /repo --output /output -p registry=http://terrapin-dev-worker.azurewebsites.net/api/registry
+
+    - uses: jikuma/githubaction@v0.3.3-alpha
+      name: Create release
+      with:
+        operation: 'create a release'
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        release_title: 'Terrapin release'
+        release_note: 'Job: 0a200ee4-d72c-482a-b7ef-74f97afbf29e | Package: markdown-it-abbr@1.0.4 | Manager: Npm | Commit: ${{ github.sha }}'
+        asset_filepath: '/home/runner/outputfolder/markdown-it-abbr-1.0.4.tgz'
+        tag_name: v1.0.4+${{ github.sha }}
