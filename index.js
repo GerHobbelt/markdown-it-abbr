@@ -148,5 +148,5 @@ module.exports = function sub_plugin(md) {
 
   md.block.ruler.before('reference', 'abbr_def', abbr_def, { alt: [ 'paragraph', 'reference' ] });
 
-  md.core.ruler.after('linkify', 'abbr_replace', abbr_replace);
+  md.core.ruler.before('replacements', 'abbr_replace', abbr_replace);
 };
