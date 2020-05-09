@@ -10,28 +10,42 @@
     "abbr"
   ],
   "homepage": "https://github.com/markdown-it/markdown-it-abbr",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/GerHobbelt/markdown-it-abbr.git"
-  },
+  "repository": "GerHobbelt/markdown-it-abbr",
   "bugs": {
     "url": "https://github.com/markdown-it/markdown-it-abbr/issues"
   },
   "license": "MIT",
   "main": "index.js",
   "scripts": {
-    "test": "make test",
     "build": "make",
+    "test": "make test",
+    "todo": "make todo",
+    "clean": "make clean",
+    "superclean": "make superclean",
+    "doc": "make doc",
+    "lint": "make lint",
+    "lintfix": "make lintfix",
+    "cov": "make report-coverage",
     "pub": "npm publish --access public"
   },
   "devDependencies": {
-    "@gerhobbelt/markdown-it": "10.0.0-31",
+    "@gerhobbelt/markdown-it": "10.0.0-33",
     "@gerhobbelt/markdown-it-testgen": "0.1.6-7",
     "browserify": "16.5.1",
-    "chai": "^4.2.0",
-    "eslint": "6.8.0",
-    "istanbul": "0.4.5",
-    "mocha": "7.1.1",
-    "uglify-js": "3.8.1"
-  }
+    "chai": "4.2.0",
+    "cross-env": "7.0.2",
+    "eslint": "7.0.0",
+    "mocha": "7.1.2",
+    "nyc": "15.0.1",
+    "rollup": "2.8.2",
+    "rollup-plugin-commonjs": "10.1.0",
+    "rollup-plugin-json": "4.0.0",
+    "rollup-plugin-node-resolve": "5.2.0",
+    "terser": "4.6.13"
+  },
+  "reporter": [
+    "lcov",
+    "text",
+    "text-summary"
+  ]
 }

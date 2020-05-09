@@ -17,14 +17,39 @@ build: lint browserify test coverage todo
 lint:
 	eslint .
 
+lintfix:
+	eslint --fix .
+
+rollup:
+	-mkdir dist
+	# Rollup
+	rollup -c
+
 test: lint
 	mocha
 
 coverage:
 	-rm -rf coverage
-	istanbul cover node_modules/mocha/bin/_mocha
+	cross-env NODE_ENV=test nyc mocha
 
-report-coverage: coverage
+report-coverage: lint coverage
+
+
+publish:
+	@if test 0 -ne `git status --porcelain | wc -l` ; then \
+		echo "Unclean working tree. Commit or stash changes first." >&2 ; \
+		exit 128 ; \
+		fi
+	@if test 0 -ne `git fetch ; git status | grep '^# Your branch' | wc -l` ; then \
+		echo "Local/Remote history differs. Please push/pull changes." >&2 ; \
+		exit 128 ; \
+		fi
+	@if test 0 -ne `git tag -l ${NPM_VERSION} | wc -l` ; then \
+		echo "Tag ${NPM_VERSION} exists. Update package.json" >&2 ; \
+		exit 128 ; \
+		fi
+	git tag ${NPM_VERSION} && git push origin ${NPM_VERSION}
+	npm run pub
 
 browserify:
 	-rm -rf ./dist
@@ -36,7 +61,7 @@ browserify:
 
 minify: browserify
 	# Minify
-	uglifyjs dist/${NPM_PACKAGE}.js -b beautify=false,ascii_only=true -c -m \
+	terser dist/${NPM_PACKAGE}.js -b beautify=false,ascii_only=true -c -m \
 		--preamble "/*! ${NPM_PACKAGE} ${NPM_VERSION} ${GITHUB_PROJ} @license MIT */" \
 		> dist/${NPM_PACKAGE}.min.js
 
@@ -45,7 +70,7 @@ todo:
 	@echo "TODO list"
 	@echo "---------"
 	@echo ""
-	grep 'TODO' -n -r ./lib 2>/dev/null || test true
+	grep 'TODO' -n -r ./ --exclude-dir=node_modules --exclude-dir=unicode-homographs --exclude-dir=dist --exclude-dir=coverage --exclude=Makefile 2>/dev/null || test true
 
 clean:
 	-rm -rf ./coverage/
@@ -60,5 +85,5 @@ prep: superclean
 	-npm install
 
 
-.PHONY: clean lint test todo coverage report-coverage build browserify minify superclean prep
+.PHONY: clean superclean prep publish lint fix test todo demo coverage report-coverage doc build browserify minify gh-doc rollup
 .SILENT: help lint test todo
