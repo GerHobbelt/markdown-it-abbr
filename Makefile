@@ -1,7 +1,9 @@
 PATH        := ./node_modules/.bin:${PATH}
 
-NPM_PACKAGE := $(shell node -e 'process.stdout.write(require("./package.json").name.replace(/^.*?\//, ""))')
-NPM_VERSION := $(shell node -e 'process.stdout.write(require("./package.json").version)')
+NPM_PACKAGE := $(shell support/getGlobalName.js package)
+NPM_VERSION := $(shell support/getGlobalName.js version)
+
+GLOBAL_NAME := $(shell support/getGlobalName.js global)
 
 TMP_PATH    := /tmp/${NPM_PACKAGE}-$(shell date +%s)
 
@@ -12,7 +14,7 @@ CURR_HEAD   := $(firstword $(shell git show-ref --hash HEAD | cut -b -6) master)
 GITHUB_PROJ := https://github.com//GerHobbelt/${NPM_PACKAGE}
 
 
-build: lint browserify test coverage todo 
+build: lint browserify rollup test coverage todo 
 
 lint:
 	eslint .
@@ -25,7 +27,7 @@ rollup:
 	# Rollup
 	rollup -c
 
-test: lint
+test:
 	mocha
 
 coverage:
@@ -56,7 +58,7 @@ browserify:
 	mkdir dist
 	# Browserify
 	( printf "/*! ${NPM_PACKAGE} ${NPM_VERSION} ${GITHUB_PROJ} @license MIT */" ; \
-		browserify ./ -s markdownitAbbr \
+		browserify ./index.js -s ${GLOBAL_NAME} \
 		) > dist/${NPM_PACKAGE}.js
 
 minify: browserify
@@ -85,5 +87,5 @@ prep: superclean
 	-npm install
 
 
-.PHONY: clean superclean prep publish lint fix test todo demo coverage report-coverage doc build browserify minify gh-doc rollup
+.PHONY: clean superclean prep publish lint fix test todo coverage report-coverage doc build browserify minify gh-doc rollup
 .SILENT: help lint test todo

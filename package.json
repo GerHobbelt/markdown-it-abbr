@@ -11,9 +11,6 @@
   ],
   "homepage": "https://github.com/markdown-it/markdown-it-abbr",
   "repository": "GerHobbelt/markdown-it-abbr",
-  "bugs": {
-    "url": "https://github.com/markdown-it/markdown-it-abbr/issues"
-  },
   "license": "MIT",
   "main": "index.js",
   "scripts": {
@@ -29,7 +26,7 @@
     "pub": "npm publish --access public"
   },
   "devDependencies": {
-    "@gerhobbelt/markdown-it": "10.0.0-33",
+    "@gerhobbelt/markdown-it": "10.0.0-34",
     "@gerhobbelt/markdown-it-testgen": "0.1.6-7",
     "browserify": "16.5.1",
     "chai": "4.2.0",
