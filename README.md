@@ -50,4 +50,4 @@ package system, module will add itself globally as `window.markdownitAbbr`.
 
 ## License
 
-[MIT](https://github.com/GerHobbelt/markdown-it-abbr/blob/master/LICENSE)
+[MIT](https://github.com/GerHobbelt/markdown-it-abbr/LICENSE)

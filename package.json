@@ -9,10 +9,14 @@
     "abbreviation",
     "abbr"
   ],
-  "homepage": "https://github.com/markdown-it/markdown-it-abbr",
   "repository": "GerHobbelt/markdown-it-abbr",
   "license": "MIT",
+  "source": "index.js",
   "main": "index.js",
+  "module": "dist/markdown-it.mjs",
+  "engines": {
+    "node": ">=10"
+  },
   "scripts": {
     "build": "make",
     "test": "make test",
@@ -34,7 +38,7 @@
     "eslint": "7.0.0",
     "mocha": "7.1.2",
     "nyc": "15.0.1",
-    "rollup": "2.8.2",
+    "rollup": "2.9.0",
     "rollup-plugin-commonjs": "10.1.0",
     "rollup-plugin-json": "4.0.0",
     "rollup-plugin-node-resolve": "5.2.0",

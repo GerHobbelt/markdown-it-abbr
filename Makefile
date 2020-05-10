@@ -57,7 +57,7 @@ browserify:
 	-rm -rf ./dist
 	mkdir dist
 	# Browserify
-	( printf "/*! ${NPM_PACKAGE} ${NPM_VERSION} ${GITHUB_PROJ} @license MIT */" ; \
+	( printf "/*! ${NPM_PACKAGE} ${NPM_VERSION} ${GITHUB_PROJ} @license MIT */\n\n" ; \
 		browserify ./index.js -s ${GLOBAL_NAME} \
 		) > dist/${NPM_PACKAGE}.js
 
