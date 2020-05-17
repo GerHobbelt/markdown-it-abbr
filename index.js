@@ -1,20 +1,17 @@
 // Enclose abbreviations in <abbr> tags
 //
 
-'use strict';
-
-
 module.exports = function sub_plugin(md) {
-  let escapeRE        = md.utils.escapeRE,
-      arrayReplaceAt  = md.utils.arrayReplaceAt;
+  const escapeRE = md.utils.escapeRE;
+  const arrayReplaceAt = md.utils.arrayReplaceAt;
 
   // ASCII characters in Cc, Sc, Sm, Sk categories we should terminate on;
   // you can check character classes here:
   // http://www.unicode.org/Public/UNIDATA/UnicodeData.txt
-  let OTHER_CHARS      = ' \r\n$+<=>^`|~';
+  const OTHER_CHARS = ' \r\n$+<=>^`|~';
 
-  let UNICODE_PUNCT_RE = md.utils.lib.ucmicro.P.source;
-  let UNICODE_SPACE_RE = md.utils.lib.ucmicro.Z.source;
+  const UNICODE_PUNCT_RE = md.utils.lib.ucmicro.P.source;
+  const UNICODE_SPACE_RE = md.utils.lib.ucmicro.Z.source;
 
 
   function abbr_def(state, startLine, endLine, silent) {

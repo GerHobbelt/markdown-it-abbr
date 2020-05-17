@@ -1,4 +1,13 @@
-node_modules/
-coverage/
+# OS X crap
+.DS_Store
+
+# no log
 *.log
-/.nyc_output
+
+# Node.js / npm
+node_modules/
+
+# code coverage
+.nyc_output
+coverage/
+
