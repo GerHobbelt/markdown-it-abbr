@@ -1,4 +1,4 @@
-/*! markdown-it-abbr 1.0.4-16 https://github.com//GerHobbelt/markdown-it-abbr @license MIT */
+/*! markdown-it-abbr 1.0.4-17 https://github.com//GerHobbelt/markdown-it-abbr @license MIT */
 
 module.exports = function sub_plugin(md) {
   const escapeRE = md.utils.escapeRE;
