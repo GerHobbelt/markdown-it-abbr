@@ -5,9 +5,14 @@
   factory();
 }((function () { 'use strict';
 
+  // Enclose abbreviations in <abbr> tags
+  //
   module.exports = function sub_plugin(md) {
     const escapeRE = md.utils.escapeRE;
-    const arrayReplaceAt = md.utils.arrayReplaceAt;
+    const arrayReplaceAt = md.utils.arrayReplaceAt; // ASCII characters in Cc, Sc, Sm, Sk categories we should terminate on;
+    // you can check character classes here:
+    // http://www.unicode.org/Public/UNIDATA/UnicodeData.txt
+
     const OTHER_CHARS = ' \r\n$+<=>^`|~';
     const UNICODE_PUNCT_RE = md.utils.lib.ucmicro.P.source;
     const UNICODE_SPACE_RE = md.utils.lib.ucmicro.Z.source;
@@ -25,11 +30,15 @@
         return false;
       }
 
-      if (state.src.charCodeAt(pos++) !== 0x2A) {
+      if (state.src.charCodeAt(pos++) !== 0x2A
+      /* * */
+      ) {
           return false;
         }
 
-      if (state.src.charCodeAt(pos++) !== 0x5B) {
+      if (state.src.charCodeAt(pos++) !== 0x5B
+      /* [ */
+      ) {
           return false;
         }
 
@@ -38,17 +47,25 @@
       for (; pos < max; pos++) {
         ch = state.src.charCodeAt(pos);
 
-        if (ch === 0x5B) {
+        if (ch === 0x5B
+        /* [ */
+        ) {
             return false;
-          } else if (ch === 0x5D) {
+          } else if (ch === 0x5D
+        /* ] */
+        ) {
             labelEnd = pos;
             break;
-          } else if (ch === 0x5C) {
+          } else if (ch === 0x5C
+        /* \ */
+        ) {
             pos++;
           }
       }
 
-      if (labelEnd < 0 || state.src.charCodeAt(labelEnd + 1) !== 0x3A) {
+      if (labelEnd < 0 || state.src.charCodeAt(labelEnd + 1) !== 0x3A
+      /* : */
+      ) {
           return false;
         }
 
@@ -69,7 +86,8 @@
 
       if (!state.env.abbreviations) {
         state.env.abbreviations = {};
-      }
+      } // prepend ':' to avoid conflict with Object.prototype members
+
 
       if (typeof state.env.abbreviations[':' + label] === 'undefined') {
         state.env.abbreviations[':' + label] = title;
@@ -105,10 +123,12 @@
         return b.length - a.length;
       }).map(escapeRE).join('|') + ')');
       regText = '(^|' + UNICODE_PUNCT_RE + '|' + UNICODE_SPACE_RE + '|[' + OTHER_CHARS.split('').map(escapeRE).join('') + '])' + '(' + Object.keys(state.env.abbreviations).map(function (x) {
-        return x.substr(1);
+        return x.substr(1); // eslint-disable-line
       }).sort(function (a, b) {
-        return b.length - a.length;
-      }).map(escapeRE).join('|') + ')' + '($|' + UNICODE_PUNCT_RE + '|' + UNICODE_SPACE_RE + '|[' + OTHER_CHARS.split('').map(escapeRE).join('') + '])';
+        // eslint-disable-line
+        return b.length - a.length; // eslint-disable-line
+      }).map(escapeRE).join('|') + ')' // eslint-disable-line
+      + '($|' + UNICODE_PUNCT_RE + '|' + UNICODE_SPACE_RE + '|[' + OTHER_CHARS.split('').map(escapeRE).join('') + '])';
       reg = new RegExp(regText, 'g');
 
       for (j = 0, l = blockTokens.length; j < l; j++) {
@@ -116,7 +136,7 @@
           continue;
         }
 
-        tokens = blockTokens[j].children;
+        tokens = blockTokens[j].children; // We scan from the end, to keep position when new tags added.
 
         for (i = tokens.length - 1; i >= 0; i--) {
           currentToken = tokens[i];
@@ -128,7 +148,8 @@
           pos = 0;
           text = currentToken.content;
           reg.lastIndex = 0;
-          nodes = [];
+          nodes = []; // fast regexp run to determine whether there are any abbreviated words
+          // in the current token
 
           if (!regSimple.test(text)) {
             continue;
@@ -166,7 +187,8 @@
             token = new state.Token('text', '', 0);
             token.content = text.slice(pos);
             nodes.push(token);
-          }
+          } // replace current node
+
 
           blockTokens[j].children = tokens = arrayReplaceAt(tokens, i, nodes);
         }

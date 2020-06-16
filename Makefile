@@ -78,5 +78,5 @@ prep: superclean
 	-npm audit fix
 
 
-.PHONY: clean superclean prep publish lint fix test todo coverage report-coverage doc build gh-doc bundle
+.PHONY: clean superclean prep publish lint lintfix test todo coverage report-coverage doc build gh-doc bundle
 .SILENT: help lint test todo
