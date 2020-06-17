@@ -1,10 +1,10 @@
 PATH        := ./node_modules/.bin:${PATH}
 
-NPM_PACKAGE := $(node support/getGlobalName.js package)
-NPM_VERSION := $(node support/getGlobalName.js version)
+NPM_PACKAGE := $(shell node support/getGlobalName.js package)
+NPM_VERSION := $(shell node support/getGlobalName.js version)
 
-GLOBAL_NAME := $(node support/getGlobalName.js global)
-BUNDLE_NAME := $(node support/getGlobalName.js microbundle)
+GLOBAL_NAME := $(shell node support/getGlobalName.js global)
+BUNDLE_NAME := $(shell node support/getGlobalName.js microbundle)
 
 TMP_PATH    := /tmp/${NPM_PACKAGE}-$(shell date +%s)
 
@@ -15,7 +15,7 @@ CURR_HEAD   := $(firstword $(shell git show-ref --hash HEAD | cut -b -6) master)
 GITHUB_PROJ := https://github.com//GerHobbelt/${NPM_PACKAGE}
 
 
-build: lintfix bundle test coverage todo 
+build: report-config lintfix bundle test coverage todo 
 
 lint:
 	eslint .
@@ -82,6 +82,9 @@ prep-ci: clean
 	-npm ci
 	-npm audit fix
 
+report-config:
+	-echo "NPM_PACKAGE=${NPM_PACKAGE} NPM_VERSION=${NPM_VERSION} GLOBAL_NAME=${GLOBAL_NAME} BUNDLE_NAME=${BUNDLE_NAME} TMP_PATH=${TMP_PATH} REMOTE_NAME=${REMOTE_NAME} REMOTE_REPO=${REMOTE_REPO} CURR_HEAD=${CURR_HEAD}"
 
-.PHONY: clean superclean prep prep-ci publish lint lintfix test todo coverage report-coverage doc build gh-doc bundle
-.SILENT: help todo
+
+.PHONY: clean superclean prep prep-ci report-config publish lint lintfix test todo coverage report-coverage doc build gh-doc bundle
+.SILENT: help todo report-config
