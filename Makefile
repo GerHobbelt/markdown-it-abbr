@@ -1,10 +1,10 @@
 PATH        := ./node_modules/.bin:${PATH}
 
-NPM_PACKAGE := $(shell support/getGlobalName.js package)
-NPM_VERSION := $(shell support/getGlobalName.js version)
+NPM_PACKAGE := $(node support/getGlobalName.js package)
+NPM_VERSION := $(node support/getGlobalName.js version)
 
-GLOBAL_NAME := $(shell support/getGlobalName.js global)
-BUNDLE_NAME := $(shell support/getGlobalName.js microbundle)
+GLOBAL_NAME := $(node support/getGlobalName.js global)
+BUNDLE_NAME := $(node support/getGlobalName.js microbundle)
 
 TMP_PATH    := /tmp/${NPM_PACKAGE}-$(shell date +%s)
 

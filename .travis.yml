@@ -5,5 +5,4 @@ node_js:
  - 12
  - node
 script: npm run build
-sudo: false
 after_success: npm run cov
