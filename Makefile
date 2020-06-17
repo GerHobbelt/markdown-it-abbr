@@ -77,6 +77,11 @@ prep: superclean
 	-npm install
 	-npm audit fix
 
+prep-ci: clean
+	-rm -rf ./node_modules/
+	-npm ci
+	-npm audit fix
 
-.PHONY: clean superclean prep publish lint lintfix test todo coverage report-coverage doc build gh-doc bundle
-.SILENT: help lint test todo
+
+.PHONY: clean superclean prep prep-ci publish lint lintfix test todo coverage report-coverage doc build gh-doc bundle
+.SILENT: help todo
