@@ -5,5 +5,5 @@ node_js:
  - 12
  - node
 script: npm run build
-before_install: make prep_ci
+before_install: make prep-ci
 after_success: npm run cov
