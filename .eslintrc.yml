@@ -6,7 +6,7 @@ env:
 extends: eslint:recommended
 
 parserOptions: 
-  ecmaVersion: 2018
+  ecmaVersion: 2020
   sourceType: module
   
 rules:
@@ -21,7 +21,7 @@ rules:
   comma-spacing:          2
   comma-style:            2
   computed-property-spacing: [ 2, never ]
-  consistent-this:        [ 2, self ]
+  consistent-this:        [ 1, self ]
   consistent-return:      2
   # ? change to multi
   curly:                  [ 2, 'multi-line' ]
@@ -31,7 +31,7 @@ rules:
   func-style:             [ 1, declaration, { "allowArrowFunctions": true } ]
   # Postponed
   #global-require:         2
-  guard-for-in:           2
+  guard-for-in:           1
   handle-callback-err:    2
 
   indent:                 [ 1, 2, { VariableDeclarator: { var: 2, let: 2, const: 3 }, SwitchCase: 0, MemberExpression: "off", ignoreComments: true } ]
@@ -108,6 +108,7 @@ rules:
   no-octal-escape:        2
   no-path-concat:         2
   no-proto:               2
+  no-prototype-builtins:  1
   no-redeclare:           2
   # Postponed
   #no-regex-spaces:        2
@@ -145,7 +146,7 @@ rules:
   # Postponed
   #spaced-comment:         [ 1, always, { exceptions: [ '/', '=' ] } ]
   strict:                 [ 1, global ]
-  quotes:                 [ 2, single, avoid-escape ]
+  quotes:                 [ 1, single, avoid-escape ]
   quote-props:            [ 1, 'as-needed', { "keywords": true } ]
   radix:                  2
   use-isnan:              2

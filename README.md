@@ -32,7 +32,6 @@ node.js, browser:
 
 ```bash
 npm install @gerhobbelt/markdown-it-abbr --save
-bower install @gerhobbelt/markdown-it-abbr --save
 ```
 
 ## Use
