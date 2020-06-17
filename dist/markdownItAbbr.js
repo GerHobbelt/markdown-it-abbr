@@ -1,4 +1,4 @@
-/*! markdown-it-abbr 1.0.4-18 https://github.com//GerHobbelt/markdown-it-abbr @license MIT */
+/*! markdown-it-abbr 1.0.4-19 https://github.com//GerHobbelt/markdown-it-abbr @license MIT */
 
 'use strict';
 
