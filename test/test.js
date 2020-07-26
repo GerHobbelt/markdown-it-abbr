@@ -11,5 +11,5 @@ describe('markdown-it-abbr', function () {
   const md = Md({ linkify: true })
               .use(plugin);
 
-  generate(path.join(__dirname, 'fixtures/abbr.txt'), null, md, null, { desc: 'abbr' });
+  generate(path.join(__dirname, 'fixtures/abbr.txt'), md);
 });
