@@ -35,7 +35,7 @@ test:
 coverage:
 	-rm -rf coverage
 	-rm -rf .nyc_output
-	cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text --reporter=html mocha
+	cross-env NODE_ENV=test nyc mocha
 
 report-coverage: lint coverage
 
