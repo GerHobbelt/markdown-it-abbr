@@ -1,4 +1,4 @@
-/*! markdown-it-abbr 1.0.4-23 https://github.com//GerHobbelt/markdown-it-abbr @license MIT */
+/*! markdown-it-abbr 1.0.4-24 https://github.com//GerHobbelt/markdown-it-abbr @license MIT */
 
 (function (factory) {
   typeof define === 'function' && define.amd ? define(factory) :
