@@ -15,7 +15,7 @@ CURR_HEAD   := $(firstword $(shell git show-ref --hash HEAD | cut -b -6) master)
 GITHUB_PROJ := https://github.com//GerHobbelt/${NPM_PACKAGE}
 
 
-build: report-config lintfix bundle test coverage todo 
+build: report-config lintfix bundle test coverage todo
 
 lint:
 	eslint .
@@ -25,7 +25,7 @@ lintfix:
 
 bundle:
 	-rm -rf ./dist
-	mkdir dist
+	-mkdir dist
 	microbundle --no-compress --target node --strict --name ${GLOBAL_NAME}
 	npx prepend-header 'dist/*js' support/header.js
 
@@ -35,7 +35,7 @@ test:
 coverage:
 	-rm -rf coverage
 	-rm -rf .nyc_output
-	cross-env NODE_ENV=test nyc mocha
+	cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text --reporter=html mocha
 
 report-coverage: lint coverage
 
