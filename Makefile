@@ -25,7 +25,7 @@ lintfix:
 
 bundle:
 	-rm -rf ./dist
-	-mkdir dist
+	mkdir dist
 	microbundle --no-compress --target node --strict --name ${GLOBAL_NAME}
 	npx prepend-header 'dist/*js' support/header.js
 
