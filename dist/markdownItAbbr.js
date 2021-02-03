@@ -1,4 +1,4 @@
-/*! markdown-it-abbr 1.0.4-25 https://github.com//GerHobbelt/markdown-it-abbr @license MIT */
+/*! markdown-it-abbr 1.0.4-26 https://github.com//GerHobbelt/markdown-it-abbr @license MIT */
 
 // Enclose abbreviations in <abbr> tags
 //
