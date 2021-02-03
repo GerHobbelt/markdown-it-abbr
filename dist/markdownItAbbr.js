@@ -1,7 +1,5 @@
 /*! markdown-it-abbr 1.0.4-25 https://github.com//GerHobbelt/markdown-it-abbr @license MIT */
 
-'use strict';
-
 // Enclose abbreviations in <abbr> tags
 //
 
@@ -14,7 +12,7 @@
 * @param {boolean=} [listPriorsFile=false] If false (default) definitions inside the markdown file overwrite
 *   existing list definitions. If true list definitions overwrite existing definitions in the markdown file.
 */
-module.exports = function sub_plugin(md, abbrDefList, listPriorsFile) {
+function sub_plugin(md, abbrDefList, listPriorsFile) {
   const escapeRE = md.utils.escapeRE;
   const arrayReplaceAt = md.utils.arrayReplaceAt; // ASCII characters in Cc, Sc, Sm, Sk categories we should terminate on;
   // you can check character classes here:
@@ -224,5 +222,7 @@ module.exports = function sub_plugin(md, abbrDefList, listPriorsFile) {
     alt: ['paragraph', 'reference']
   });
   md.core.ruler.before('replacements', 'abbr_replace', abbr_replace);
-};
-//# sourceMappingURL=markdownItAbbr.js.map
+}
+
+export default sub_plugin;
+//# sourceMappingURL=markdownItAbbr.modern.js.map

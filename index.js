@@ -10,7 +10,7 @@
 * @param {boolean=} [listPriorsFile=false] If false (default) definitions inside the markdown file overwrite
 *   existing list definitions. If true list definitions overwrite existing definitions in the markdown file.
 */
-module.exports = function sub_plugin(md, abbrDefList, listPriorsFile) {
+export default function sub_plugin(md, abbrDefList, listPriorsFile) {
   const escapeRE = md.utils.escapeRE;
   const arrayReplaceAt = md.utils.arrayReplaceAt;
 
@@ -176,4 +176,4 @@ module.exports = function sub_plugin(md, abbrDefList, listPriorsFile) {
   md.block.ruler.before('reference', 'abbr_def', abbr_def, { alt: [ 'paragraph', 'reference' ] });
 
   md.core.ruler.before('replacements', 'abbr_replace', abbr_replace);
-};
+}

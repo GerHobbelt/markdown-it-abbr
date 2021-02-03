@@ -2,56 +2,62 @@
 
 /* eslint no-console:0 */
 
-const argparse = require('argparse');
-const hdr = require('./header.js');
+import argparse from 'argparse';
 
-const cli = new argparse.ArgumentParser({
-  prog: 'getGlobalName',
-  version: hdr.version,
-  addHelp: true
-});
+async function action() {
+  const hdrMod = await import('./header.js');
+  const hdr = hdrMod.default;
 
-cli.addArgument([ 'type' ], {
-  help: 'type of name/string to produce',
-  nargs: '?',
-  choices: [ 'global', 'package', 'version', 'license', 'microbundle' ]
-});
+  const cli = new argparse.ArgumentParser({
+    prog: 'getGlobalName',
+    version: hdr.version,
+    addHelp: true
+  });
 
-const options = cli.parseArgs();
+  cli.addArgument([ 'type' ], {
+    help: 'type of name/string to produce',
+    nargs: '?',
+    choices: [ 'global', 'package', 'version', 'license', 'microbundle' ]
+  });
 
-function print(msg) {
-  process.stdout.write(msg);
+  const options = cli.parseArgs();
+
+  function print(msg) {
+    process.stdout.write(msg);
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////
+
+  switch (options.type) {
+  default:
+    cli.exit(1, cli.formatHelp());
+    break;
+
+  case 'version':
+    print(hdr.version);
+    cli.exit(0);
+    break;
+
+  case 'package':
+    print(hdr.packageName);
+    cli.exit(0);
+    break;
+
+  case 'global':
+    print(hdr.globalName);
+    cli.exit(0);
+    break;
+
+  case 'microbundle':
+    print(hdr.safeVariableName);
+    cli.exit(0);
+    break;
+
+  case 'license':
+    print(hdr.license);
+    cli.exit(0);
+    break;
+  }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
-switch (options.type) {
-default:
-  cli.exit(1, cli.formatHelp());
-  break;
-
-case 'version':
-  print(hdr.version);
-  cli.exit(0);
-  break;
-
-case 'package':
-  print(hdr.packageName);
-  cli.exit(0);
-  break;
-
-case 'global':
-  print(hdr.globalName);
-  cli.exit(0);
-  break;
-
-case 'microbundle':
-  print(hdr.safeVariableName);
-  cli.exit(0);
-  break;
-
-case 'license':
-  print(hdr.license);
-  cli.exit(0);
-  break;
-}
+action();

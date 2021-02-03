@@ -15,7 +15,7 @@ CURR_HEAD   := $(firstword $(shell git show-ref --hash HEAD | cut -b -6) master)
 GITHUB_PROJ := https://github.com//GerHobbelt/${NPM_PACKAGE}
 
 
-build: report-config lintfix bundle test coverage todo
+build: lintfix bundle test coverage todo 
 
 lint:
 	eslint .
@@ -26,7 +26,9 @@ lintfix:
 bundle:
 	-rm -rf ./dist
 	mkdir dist
-	microbundle --no-compress --target node --strict --name ${GLOBAL_NAME}
+	microbundle --no-compress --target node --strict --name ${GLOBAL_NAME} -f modern
+	mv dist/${GLOBAL_NAME}.modern.js dist/${GLOBAL_NAME}.js
+	mv dist/${GLOBAL_NAME}.modern.js.map dist/${GLOBAL_NAME}.js.map
 	npx prepend-header 'dist/*js' support/header.js
 
 test:
@@ -87,4 +89,4 @@ report-config:
 
 
 .PHONY: clean superclean prep prep-ci report-config publish lint lintfix test todo coverage report-coverage doc build gh-doc bundle
-.SILENT: help todo report-config
+.SILENT: help lint test todo

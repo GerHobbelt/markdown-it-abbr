@@ -11,11 +11,11 @@
   ],
   "repository": "GerHobbelt/markdown-it-abbr",
   "license": "MIT",
+  "type": "module",
   "source": "index.js",
   "main": "dist/markdownItAbbr.js",
-  "module": "dist/markdownItAbbr.mjs",
   "engines": {
-    "node": ">=10"
+    "node": ">=12.20.0"
   },
   "scripts": {
     "build": "make",
@@ -35,9 +35,10 @@
   "devDependencies": {
     "@gerhobbelt/markdown-it": "12.0.4-51",
     "@gerhobbelt/markdown-it-testgen": "0.1.6-17",
-    "@gerhobbelt/prepend-header": "1.0.10-4",
+    "@gerhobbelt/prepend-header": "1.1.0-7",
+    "argparse": "2.0.1",
     "cross-env": "7.0.3",
-    "eslint": "7.16.0",
+    "eslint": "7.19.0",
     "microbundle": "0.13.0",
     "mocha": "8.2.1",
     "nyc": "15.1.0"
